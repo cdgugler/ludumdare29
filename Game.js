@@ -75,8 +75,10 @@ BasicGame.Game.prototype = {
                 if (rNum2 == 3) {
                     rNum = -rNum;
                 }
-                if (this.game.player.alive == true) {
-                    removeX = this.game.player.body.x + 64 * rNum;
+                if (this.game.player) {
+                    if (this.game.player.alive == true) {
+                        removeX = this.game.player.body.x + 64 * rNum;
+                    }
                 } else {
                     removeX = 10;
                 }
