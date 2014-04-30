@@ -67,6 +67,13 @@ BasicGame.Game.prototype = {
         // this.game.monster.body.setSize(62, 128, 0, 0);
         this.game.monsters.physicsBodyType = Phaser.Physics.ARCADE;
 
+        // set up the audio
+        this.game.fx = this.game.add.audio('sfx');
+        this.game.fx.addMarker('monsterRoar', 2, 1.2);
+        this.game.fx.addMarker('playerEaten', 5, 0.5);
+        this.game.fx.addMarker('playerInWater', 7, 0.5);
+        this.game.fx.addMarker('jump', 0, 0.24);
+
         this.game.explodeTile = function() {
             var rNum = this.rnd.integerInRange(0, 13);
             var rNum2 = this.rnd.integerInRange(0, 3);
@@ -87,11 +94,12 @@ BasicGame.Game.prototype = {
                     var newTile = this.game.water.create(oldTile.worldX, oldTile.worldY, 'sprites', 'watertile.png');
                     newTile.body.allowGravity = false;
                     newTile.body.setSize(64, 20, 0, 44);
-                    if (rNum2 > 1) {
+                    if (rNum2 > 1 && this.game.player.body.x > 5000) {
                         var newMonster = this.game.monsters.create(newTile.body.x, newTile.body.y + 50, 'sprites', 'alchemymonster.png');
                         newMonster.body.allowGravity = false;
                         var top = newTile.body.y - 2500;
                         var height = this.rnd.integerInRange(800, 1000);
+                        this.game.fx.play('monsterRoar');
                         this.game.add.tween(newMonster)
                             .to({ y: height }, 500, Phaser.Easing.Exponential.In)
                             .to({ y: 1200 }, 700, Phaser.Easing.Linear.None)
@@ -105,6 +113,7 @@ BasicGame.Game.prototype = {
 
         this.game.playerInWater = function() {
             this.game.player.kill(); 
+            this.game.fx.play('playerInWater');
             this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '84px Arial', fill: '#fff' });
 		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
             this.game.stateText.anchor.setTo(0.5, 0.5);
@@ -114,6 +123,7 @@ BasicGame.Game.prototype = {
         };
         this.game.playerInMonster = function() {
             this.game.player.kill(); 
+            this.game.fx.play('playerEaten');
             this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '84px Arial', fill: '#fff' });
 		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
             this.game.stateText.anchor.setTo(0.5, 0.5);
@@ -165,10 +175,12 @@ BasicGame.Game.prototype = {
             }
             if (this.game.cursors.up.isDown) {
                 if (this.game.player.body.onFloor()) {
+                    this.game.fx.play('jump');
                     this.game.player.doubleJump = false;
                     this.game.player.body.velocity.y = -450;
                     this.game.player.jumpTimer = this.game.time.now + 150;
                 } else if (this.game.player.doubleJump == false && this.game.time.now > this.game.player.jumpTimer){ 
+                    this.game.fx.play('jump');
                     this.game.player.doubleJump = true;
                     this.game.player.body.velocity.y = -450;
                 }

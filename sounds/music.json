@@ -1,0 +1,13 @@
+{
+  "resources": [
+    "music.ogg",
+    "music.mp3"
+  ],
+  "spritemap": {
+    "simplebg": {
+      "start": 0,
+      "end": 7.685804988662132,
+      "loop": false
+    }
+  }
+}

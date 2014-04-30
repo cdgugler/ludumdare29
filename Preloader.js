@@ -31,11 +31,14 @@ BasicGame.Preloader.prototype = {
 		//	+ lots of other required assets here
         this.load.tilemap('level1', 'maps/level1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles', 'images/tiles.png');
+        this.load.audio('sfx', ['sounds/soundfx.mp3', 'sounds/soundfx.ogg']);
+        this.load.audio('music', ['sounds/music.mp3', 'sounds/music.ogg']);
 
 	},
 
 	create: function () {
-
+        this.game.music = this.game.add.audio('music', 1, true);
+        this.game.music.play('',0,1,true);
 		//	Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes
 		this.preloadBar.cropEnabled = false;
 		this.state.start('MainMenu');
