@@ -114,7 +114,7 @@ BasicGame.Game.prototype = {
         this.game.playerInWater = function() {
             this.game.player.kill(); 
             this.game.fx.play('playerInWater');
-            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '84px Arial', fill: '#fff' });
+            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '64px Arial', fill: '#fff' });
 		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
             this.game.stateText.anchor.setTo(0.5, 0.5);
             this.game.stateText.text = "THE WATER IS COLD";
@@ -124,7 +124,7 @@ BasicGame.Game.prototype = {
         this.game.playerInMonster = function() {
             this.game.player.kill(); 
             this.game.fx.play('playerEaten');
-            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '84px Arial', fill: '#fff' });
+            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '64px Arial', fill: '#fff' });
 		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
             this.game.stateText.anchor.setTo(0.5, 0.5);
             this.game.stateText.text = "THEY'RE STILL HUNGRY";
