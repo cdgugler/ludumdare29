@@ -114,7 +114,7 @@ BasicGame.Game.prototype = {
         this.game.playerInWater = function() {
             this.game.player.kill(); 
             this.game.fx.play('playerInWater');
-            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '64px Arial', fill: '#fff' });
+            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '48px Arial', fill: '#fff' });
 		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
             this.game.stateText.anchor.setTo(0.5, 0.5);
             this.game.stateText.text = "THE WATER IS COLD";
@@ -124,7 +124,7 @@ BasicGame.Game.prototype = {
         this.game.playerInMonster = function() {
             this.game.player.kill(); 
             this.game.fx.play('playerEaten');
-            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '64px Arial', fill: '#fff' });
+            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '48px Arial', fill: '#fff' });
 		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
             this.game.stateText.anchor.setTo(0.5, 0.5);
             this.game.stateText.text = "THEY'RE STILL HUNGRY";
@@ -148,7 +148,7 @@ BasicGame.Game.prototype = {
                     this.game.player.facing = 'left';
                     this.game.player.scale.x = -1;
                 }
-                if (this.game.player.body.velocity.x > -this.game.player.maxSpeed && this.game.player.body.onFloor()) {
+                if (this.game.player.body.velocity.x > -this.game.player.maxSpeed) {
                     this.game.player.body.velocity.x -= this.game.player.speed;
                 }
             } else if (this.game.cursors.right.isDown) {
@@ -157,7 +157,7 @@ BasicGame.Game.prototype = {
                     this.game.player.facing = 'right';
                     this.game.player.scale.x = 1;
                 }
-                if (this.game.player.body.velocity.x < this.game.player.maxSpeed && this.game.player.body.onFloor()) {
+                if (this.game.player.body.velocity.x < this.game.player.maxSpeed) {
                     this.game.player.body.velocity.x += this.game.player.speed;
                 }
             } else {
@@ -177,13 +177,17 @@ BasicGame.Game.prototype = {
                 if (this.game.player.body.onFloor()) {
                     this.game.fx.play('jump');
                     this.game.player.doubleJump = false;
-                    this.game.player.body.velocity.y = -450;
+                    this.game.player.body.velocity.y = -400;
                     this.game.player.jumpTimer = this.game.time.now + 150;
                 } else if (this.game.player.doubleJump == false && this.game.time.now > this.game.player.jumpTimer){ 
                     this.game.fx.play('jump');
                     this.game.player.doubleJump = true;
-                    this.game.player.body.velocity.y = -450;
+                    this.game.player.body.velocity.y = -400;
                 }
+            }
+            // Pause Music for dev
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.M)) {
+                this.game.music.pause();
             }
             if (this.game.gameOver == true) {
                 if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
