@@ -1,0 +1,21 @@
+{
+  "name": "Crash Landing",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cdgugler/ludumdare29",
+  "authors": [
+    "Cory Gugler <cory.gugler@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/js/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "phaser": "~2.2.2"
+  }
+}
