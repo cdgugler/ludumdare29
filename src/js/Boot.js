@@ -1,10 +1,10 @@
-var BasicGame = {};
+var CrashLanding = {};
 
-BasicGame.Boot = function (game) {
+CrashLanding.Boot = function (game) {
 
 };
 
-BasicGame.Boot.prototype = {
+CrashLanding.Boot.prototype = {
 
     preload: function () {
 
@@ -16,30 +16,24 @@ BasicGame.Boot.prototype = {
 
     create: function () {
 
-        //  Unless you specifically know your game needs to support multi-touch I would recommend setting this to 1
-        this.input.maxPointers = 1;
-
-        //  Phaser will automatically pause if the browser tab the game is in loses focus. You can disable that here:
+        this.input.maxPointers = 3;
         this.stage.disableVisibilityChange = true;
 
         if (this.game.device.desktop)
         {
-            //  If you have any desktop specific settings, they can go in here
             this.scale.pageAlignHorizontally = true;
         }
         else
         {
-            //  Same goes for mobile settings.
-            //  In this case we're saying "scale the game, no lower than 480x260 and no higher than 1024x768"
             this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
             this.scale.minWidth = 320;
             this.scale.minHeight = 180;
-            this.scale.maxWidth = gameWidth;
-            this.scale.maxHeight = gameHeight;
             this.scale.forceLandscape = true;
             this.scale.pageAlignHorizontally = true;
             this.scale.setScreenSize(true);
         }
+        if (!this.game.device.desktop){ this.game.input.onDown.add(function() { this.game.scale.startFullScreen(false); }.bind(this), this); }
 
         //  By this point the preloader assets have loaded to the cache, we've set the game settings
         //  So now let's start the real preloader going

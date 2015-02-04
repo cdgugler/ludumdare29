@@ -1,5 +1,5 @@
 
-BasicGame.Game = function (game) {
+CrashLanding.Game = function (game) {
 
 	//	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
@@ -25,7 +25,7 @@ BasicGame.Game = function (game) {
 
 };
 
-BasicGame.Game.prototype = {
+CrashLanding.Game.prototype = {
 
 	create: function () {
 		// this.background = this.add.sprite(0, 0, 'preloaderBackground');
@@ -115,7 +115,7 @@ BasicGame.Game.prototype = {
             this.game.player.kill(); 
             this.game.fx.play('playerInWater');
             this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '48px Arial', fill: '#fff' });
-		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
+		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2 - 50, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
             this.game.stateText.anchor.setTo(0.5, 0.5);
             this.game.stateText.text = "THE WATER IS COLD";
             this.game.stateText.visible = true;
@@ -125,7 +125,7 @@ BasicGame.Game.prototype = {
             this.game.player.kill(); 
             this.game.fx.play('playerEaten');
             this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '48px Arial', fill: '#fff' });
-		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
+		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2 - 50, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
             this.game.stateText.anchor.setTo(0.5, 0.5);
             this.game.stateText.text = "THEY'RE STILL HUNGRY";
             this.game.stateText.visible = true;

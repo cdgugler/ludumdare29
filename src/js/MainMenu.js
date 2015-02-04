@@ -1,12 +1,12 @@
 
-BasicGame.MainMenu = function (game) {
+CrashLanding.MainMenu = function (game) {
 
 	this.music = null;
 	this.playButton = null;
 
 };
 
-BasicGame.MainMenu.prototype = {
+CrashLanding.MainMenu.prototype = {
 
 	create: function () {
 
