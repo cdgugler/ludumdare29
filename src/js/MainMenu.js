@@ -26,6 +26,7 @@ CrashLanding.MainMenu.prototype = {
 
 	update: function () {
 
+
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             this.startGame();
         }

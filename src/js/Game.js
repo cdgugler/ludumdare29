@@ -74,6 +74,15 @@ CrashLanding.Game.prototype = {
         this.game.fx.addMarker('playerInWater', 7, 0.5);
         this.game.fx.addMarker('jump', 0, 0.24);
 
+        // add mobile gamepad
+        // Should check for desktop and only display if not?
+        this.game.buttonA = this.game.add.button(this.game.width - 70, this.game.height - 68, 'buttonA', null, this, 0, 0, 0, 0);
+        this.game.buttonA.fixedToCamera = true;
+        this.game.buttonA.events.onInputOver.add(function() {this.game.buttonA._active = true; }.bind(this));
+        this.game.buttonA.events.onInputDown.add(function() {this.game.buttonA._active = true; }.bind(this));
+        this.game.buttonA.events.onInputOut.add(function() {this.game.buttonA._active = false; }.bind(this));
+        this.game.buttonA.events.onInputUp.add(function() {this.game.buttonA._active = false; }.bind(this));
+
         this.game.explodeTile = function() {
             var rNum = this.rnd.integerInRange(0, 13);
             var rNum2 = this.rnd.integerInRange(0, 3);
@@ -173,7 +182,7 @@ CrashLanding.Game.prototype = {
                     }
                 }
             }
-            if (this.game.cursors.up.isDown) {
+            if (this.game.cursors.up.isDown || this.game.buttonA._active) {
                 if (this.game.player.body.onFloor()) {
                     this.game.fx.play('jump');
                     this.game.player.doubleJump = false;
@@ -194,6 +203,10 @@ CrashLanding.Game.prototype = {
                     this.quitGame();
                 }
             }
+        }
+
+        if (this.game.input.currentPointers == 0 && !this.game.input.activePointer.isMouse) {
+            this.game.buttonA._active = false;
         }
 
 	},

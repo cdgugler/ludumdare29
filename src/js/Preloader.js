@@ -3,7 +3,6 @@ CrashLanding.Preloader = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
-
 	this.ready = false;
 
 };
@@ -12,8 +11,6 @@ CrashLanding.Preloader.prototype = {
 
 	preload: function () {
 
-		//	These are the assets we loaded in Boot.js
-		//	A nice sparkly background and a loading progress bar
 		this.background = this.add.sprite(0, 0, 'preloaderBackground');
 		this.preloadBar = this.add.sprite(this.game.centerX, this.game.centerY, 'preloaderBar');
 
@@ -22,15 +19,12 @@ CrashLanding.Preloader.prototype = {
 		//	as the files below are loaded in.
 		this.load.setPreloadSprite(this.preloadBar);
 
-		//	Here we load the rest of the assets our game needs.
-		//	As this is just a Project Template I've not provided these assets, swap them for your own.
-		// this.load.image('titlepage', 'images/title.jpg');
 		this.load.atlas('sprites', 'images/sprites.png', 'images/sprites.json');
-		// this.load.audio('titleMusic', ['audio/main_menu.mp3']);
-		// this.load.bitmapFont('caslon', 'fonts/caslon.png', 'fonts/caslon.xml');
-		//	+ lots of other required assets here
         this.load.tilemap('level1', 'maps/level1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles', 'images/tiles.png');
+        this.load.spritesheet('buttonLeft', 'images/left.png', 64, 64);
+        this.load.spritesheet('buttonRight', 'images/right.png', 64, 64);
+        this.load.spritesheet('buttonA', 'images/a-button.png', 64, 64);
         this.load.audio('sfx', ['sounds/soundfx.mp3', 'sounds/soundfx.ogg']);
         this.load.audio('music', ['sounds/music.mp3', 'sounds/music.ogg']);
 
