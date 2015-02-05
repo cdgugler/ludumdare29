@@ -83,6 +83,20 @@ CrashLanding.Game.prototype = {
         this.game.buttonA.events.onInputOut.add(function() {this.game.buttonA._active = false; }.bind(this));
         this.game.buttonA.events.onInputUp.add(function() {this.game.buttonA._active = false; }.bind(this));
 
+        this.game.buttonLeft = this.game.add.button(12, this.game.height - 68, 'buttonLeft', null, this, 0, 0, 0, 0);
+        this.game.buttonLeft.fixedToCamera = true;
+        this.game.buttonLeft.events.onInputOver.add(function() {this.game.buttonLeft._active = true; }.bind(this));
+        this.game.buttonLeft.events.onInputDown.add(function() {this.game.buttonLeft._active = true; }.bind(this));
+        this.game.buttonLeft.events.onInputOut.add(function() {this.game.buttonLeft._active = false; }.bind(this));
+        this.game.buttonLeft.events.onInputUp.add(function() {this.game.buttonLeft._active = false; }.bind(this));
+
+        this.game.buttonRight = this.game.add.button(88, this.game.height - 68, 'buttonRight', null, this, 0, 0, 0, 0);
+        this.game.buttonRight.fixedToCamera = true;
+        this.game.buttonRight.events.onInputOver.add(function() {this.game.buttonRight._active = true; }.bind(this));
+        this.game.buttonRight.events.onInputDown.add(function() {this.game.buttonRight._active = true; }.bind(this));
+        this.game.buttonRight.events.onInputOut.add(function() {this.game.buttonRight._active = false; }.bind(this));
+        this.game.buttonRight.events.onInputUp.add(function() {this.game.buttonRight._active = false; }.bind(this));
+
         this.game.explodeTile = function() {
             var rNum = this.rnd.integerInRange(0, 13);
             var rNum2 = this.rnd.integerInRange(0, 3);
@@ -151,7 +165,7 @@ CrashLanding.Game.prototype = {
         handleInput.call(this);
 
         function handleInput() {
-            if (this.game.cursors.left.isDown) {
+            if (this.game.cursors.left.isDown || this.game.buttonLeft._active) {
                 if (this.game.player.facing != 'left') {
                     this.game.player.animations.play('running');
                     this.game.player.facing = 'left';
@@ -160,7 +174,7 @@ CrashLanding.Game.prototype = {
                 if (this.game.player.body.velocity.x > -this.game.player.maxSpeed) {
                     this.game.player.body.velocity.x -= this.game.player.speed;
                 }
-            } else if (this.game.cursors.right.isDown) {
+            } else if (this.game.cursors.right.isDown || this.game.buttonRight._active) {
                 if (this.game.player.facing != 'right') {
                     this.game.player.animations.play('running');
                     this.game.player.facing = 'right';
@@ -207,6 +221,8 @@ CrashLanding.Game.prototype = {
 
         if (this.game.input.currentPointers == 0 && !this.game.input.activePointer.isMouse) {
             this.game.buttonA._active = false;
+            this.game.buttonLeft._active = false;
+            this.game.buttonRight._active = false;
         }
 
 	},
