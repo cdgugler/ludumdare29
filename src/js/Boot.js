@@ -33,7 +33,6 @@ CrashLanding.Boot.prototype = {
             this.scale.pageAlignHorizontally = true;
             this.scale.setScreenSize(true);
         }
-        if (!this.game.device.desktop){ this.game.input.onDown.add(function() { this.game.scale.startFullScreen(false); }.bind(this), this); }
 
         //  By this point the preloader assets have loaded to the cache, we've set the game settings
         //  So now let's start the real preloader going

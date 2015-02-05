@@ -22,6 +22,9 @@ CrashLanding.MainMenu.prototype = {
 
 		this.playButton = this.add.button(this.game.camera.x + gameWidth / 2 - 128, this.game.camera.y + gameHeight / 2 - 128, 'sprites', this.startGame, this, 'runbuttonup.png', 'runbuttondown.png');
 
+        if (!this.game.device.desktop){ this.game.input.onDown.add(function() { this.game.scale.startFullScreen(false); }.bind(this), this); }
+
+        this.game.input.onDown.add(function() { this.game.scale.startFullScreen(false); }.bind(this), this);
 	},
 
 	update: function () {
