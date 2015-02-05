@@ -1,4 +1,3 @@
 /phaser/*
 !/phaser/build
 !/phaser/build/*
-src/js/lib
