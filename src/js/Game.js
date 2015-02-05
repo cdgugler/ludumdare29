@@ -28,15 +28,15 @@ CrashLanding.Game = function (game) {
 CrashLanding.Game.prototype = {
 
 	create: function () {
-		// this.background = this.add.sprite(0, 0, 'preloaderBackground');
         this.level1map = this.game.add.tilemap('level1');
         this.level1map.addTilesetImage('tileset', 'tiles');
         this.level1map.setCollisionByExclusion([]);
         this.layer1 = this.level1map.createLayer('Tile Layer 1');
         this.game.stage.backgroundColor = '#003e7b';
-        // this.layer1.debug = true;
         this.layer1.resizeWorld();
         this.game.physics.arcade.gravity.y = 1200;
+
+        // TODO Move player to it's own class
         this.game.player = this.game.add.sprite(10, 1022, 'sprites', 'standing.png');
         this.game.physics.enable(this.game.player, Phaser.Physics.ARCADE);
         this.game.player.body.collideWorldBounds = true;
@@ -58,10 +58,12 @@ CrashLanding.Game.prototype = {
 
         this.game.timer = this.game.time.create(false);
 
+        // TODO Water tiles should have a class?
         this.game.water = this.game.add.group();
         this.game.water.enableBody = true;
         this.game.water.physicsBodyType = Phaser.Physics.ARCADE;
 
+        // TODO Move monsters to own class
         this.game.monsters = this.game.add.group();
         this.game.monsters.enableBody = true;
         // this.game.monster.body.setSize(62, 128, 0, 0);
@@ -74,28 +76,36 @@ CrashLanding.Game.prototype = {
         this.game.fx.addMarker('playerInWater', 7, 0.5);
         this.game.fx.addMarker('jump', 0, 0.24);
 
+        // Set up to avoid errors on desktop
+        this.game.buttonA = {};
+        this.game.buttonLeft = {};
+        this.game.buttonRight = {};
+
+        // TODO Move this to it's own class
         // add mobile gamepad
         // Should check for desktop and only display if not?
-        this.game.buttonA = this.game.add.button(this.game.width - 70, this.game.height - 68, 'buttonA', null, this, 0, 0, 0, 0);
-        this.game.buttonA.fixedToCamera = true;
-        this.game.buttonA.events.onInputOver.add(function() {this.game.buttonA._active = true; }.bind(this));
-        this.game.buttonA.events.onInputDown.add(function() {this.game.buttonA._active = true; }.bind(this));
-        this.game.buttonA.events.onInputOut.add(function() {this.game.buttonA._active = false; }.bind(this));
-        this.game.buttonA.events.onInputUp.add(function() {this.game.buttonA._active = false; }.bind(this));
+        if (!this.game.device.desktop) { 
+            this.game.buttonA = this.game.add.button(this.game.width - 70, this.game.height - 68, 'buttonA', null, this, 0, 0, 0, 0);
+            this.game.buttonA.fixedToCamera = true;
+            this.game.buttonA.events.onInputOver.add(function() {this.game.buttonA._active = true; }.bind(this));
+            this.game.buttonA.events.onInputDown.add(function() {this.game.buttonA._active = true; }.bind(this));
+            this.game.buttonA.events.onInputOut.add(function() {this.game.buttonA._active = false; }.bind(this));
+            this.game.buttonA.events.onInputUp.add(function() {this.game.buttonA._active = false; }.bind(this));
 
-        this.game.buttonLeft = this.game.add.button(12, this.game.height - 68, 'buttonLeft', null, this, 0, 0, 0, 0);
-        this.game.buttonLeft.fixedToCamera = true;
-        this.game.buttonLeft.events.onInputOver.add(function() {this.game.buttonLeft._active = true; }.bind(this));
-        this.game.buttonLeft.events.onInputDown.add(function() {this.game.buttonLeft._active = true; }.bind(this));
-        this.game.buttonLeft.events.onInputOut.add(function() {this.game.buttonLeft._active = false; }.bind(this));
-        this.game.buttonLeft.events.onInputUp.add(function() {this.game.buttonLeft._active = false; }.bind(this));
+            this.game.buttonLeft = this.game.add.button(12, this.game.height - 68, 'buttonLeft', null, this, 0, 0, 0, 0);
+            this.game.buttonLeft.fixedToCamera = true;
+            this.game.buttonLeft.events.onInputOver.add(function() {this.game.buttonLeft._active = true; }.bind(this));
+            this.game.buttonLeft.events.onInputDown.add(function() {this.game.buttonLeft._active = true; }.bind(this));
+            this.game.buttonLeft.events.onInputOut.add(function() {this.game.buttonLeft._active = false; }.bind(this));
+            this.game.buttonLeft.events.onInputUp.add(function() {this.game.buttonLeft._active = false; }.bind(this));
 
-        this.game.buttonRight = this.game.add.button(88, this.game.height - 68, 'buttonRight', null, this, 0, 0, 0, 0);
-        this.game.buttonRight.fixedToCamera = true;
-        this.game.buttonRight.events.onInputOver.add(function() {this.game.buttonRight._active = true; }.bind(this));
-        this.game.buttonRight.events.onInputDown.add(function() {this.game.buttonRight._active = true; }.bind(this));
-        this.game.buttonRight.events.onInputOut.add(function() {this.game.buttonRight._active = false; }.bind(this));
-        this.game.buttonRight.events.onInputUp.add(function() {this.game.buttonRight._active = false; }.bind(this));
+            this.game.buttonRight = this.game.add.button(88, this.game.height - 68, 'buttonRight', null, this, 0, 0, 0, 0);
+            this.game.buttonRight.fixedToCamera = true;
+            this.game.buttonRight.events.onInputOver.add(function() {this.game.buttonRight._active = true; }.bind(this));
+            this.game.buttonRight.events.onInputDown.add(function() {this.game.buttonRight._active = true; }.bind(this));
+            this.game.buttonRight.events.onInputOut.add(function() {this.game.buttonRight._active = false; }.bind(this));
+            this.game.buttonRight.events.onInputUp.add(function() {this.game.buttonRight._active = false; }.bind(this));
+        }
 
         this.game.explodeTile = function() {
             var rNum = this.rnd.integerInRange(0, 13);
