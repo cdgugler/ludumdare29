@@ -1,7 +1,4 @@
-
 CrashLanding.Game = function (game) {
-
-	//	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
     this.game;		//	a reference to the currently running game
     this.add;		//	used to add sprites, text, groups, etc
