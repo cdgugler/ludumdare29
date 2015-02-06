@@ -25,16 +25,20 @@ CrashLanding.Game = function (game) {
 CrashLanding.Game.prototype = {
 
 	create: function () {
+        var gravityY = 1200;
+        var playerStartX = 10;
+        var playerStartY = 1022;
+        var bgColor = '#003e7b';
+
         this.level1map = this.game.add.tilemap('level1');
         this.level1map.addTilesetImage('tileset', 'tiles');
         this.level1map.setCollisionByExclusion([]);
         this.layer1 = this.level1map.createLayer('Tile Layer 1');
-        this.game.stage.backgroundColor = '#003e7b';
+        this.game.stage.backgroundColor = bgColor;
         this.layer1.resizeWorld();
-        this.game.physics.arcade.gravity.y = 1200;
+        this.game.physics.arcade.gravity.y = gravityY;
 
-        // TODO Move player to it's own class
-        this.game.player = new Player(this.game, 10, 1022);
+        this.game.player = new Player(this.game, playerStartX, playerStartY);
 
         this.game.camera.follow(this.game.player);
         this.game.cursors = this.game.input.keyboard.createCursorKeys();
