@@ -34,20 +34,7 @@ CrashLanding.Game.prototype = {
         this.game.physics.arcade.gravity.y = 1200;
 
         // TODO Move player to it's own class
-        this.game.player = this.game.add.sprite(10, 1022, 'sprites', 'standing.png');
-        this.game.physics.enable(this.game.player, Phaser.Physics.ARCADE);
-        this.game.player.body.collideWorldBounds = true;
-        this.game.player.body.setSize(32, 64, 0, 0);
-        this.game.player.facing = 'right';
-        this.game.player.anchor.setTo(.5,.5); // so we can flip it
-        this.game.player.animations.add('running', ['0000.png', '0006.png', '0012.png', '0018.png', '0024.png', '0030.png', '0036.png', '0042.png'], 10, true);
-        this.game.player.animations.add('idle', ['standing.png'], false, false);
-        this.game.player.maxSpeed = 500;
-        this.game.player.speed = 10;
-        this.game.player.friction = 3;
-        this.game.player.jumping = false;
-        this.game.player.jumpTimer = 0;
-        this.game.player.doubleJump = false;
+        this.game.player = new Player(this.game, 10, 1022);
 
         this.game.camera.follow(this.game.player);
         this.game.cursors = this.game.input.keyboard.createCursorKeys();
