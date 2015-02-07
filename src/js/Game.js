@@ -1,5 +1,4 @@
 CrashLanding.Game = function (game) {
-
     this.game;		//	a reference to the currently running game
     this.add;		//	used to add sprites, text, groups, etc
     this.camera;	//	a reference to the game camera
@@ -16,10 +15,6 @@ CrashLanding.Game = function (game) {
     this.particles;	//	the particle manager
     this.physics;	//	the physics manager
     this.rnd;		//	the repeatable random number generator
-
-    //	You can use any of these from any function within this State.
-    //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
-
 };
 
 CrashLanding.Game.prototype = {
@@ -229,17 +224,13 @@ CrashLanding.Game.prototype = {
         this.game.camera.x = 0;
         this.game.camera.y = 0;
 
-
-		//	Then let's go back to the main menu.
 		this.state.start('MainMenu');
-
 	},
     render: function () {
         // this.game.debug.body(this.game.player);
         // this.game.water.forEach(function() {
         //     this.game.debug.body(this.game.water.children[0]);
         // }, this)
-
     }
 
 };
