@@ -57,12 +57,7 @@ CrashLanding.Game.prototype = {
         // this.game.monster.body.setSize(62, 128, 0, 0);
         this.game.monsters.physicsBodyType = Phaser.Physics.ARCADE;
 
-        // set up the audio
-        this.game.fx = this.game.add.audio('sfx');
-        this.game.fx.addMarker('monsterRoar', 2, 1.2);
-        this.game.fx.addMarker('playerEaten', 5, 0.5);
-        this.game.fx.addMarker('playerInWater', 7, 0.5);
-        this.game.fx.addMarker('jump', 0, 0.24);
+        this.game.fx = initAudio(this.game);
 
         // Set up to avoid errors on desktop
         this.game.buttonA = {};
