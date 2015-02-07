@@ -25,12 +25,12 @@ CrashLanding.Game.prototype = {
         var playerStartY = 1022;
         var bgColor = '#003e7b';
 
-        this.level1map = this.game.add.tilemap('level1');
-        this.level1map.addTilesetImage('tileset', 'tiles');
-        this.level1map.setCollisionByExclusion([]);
-        this.layer1 = this.level1map.createLayer('Tile Layer 1');
-        this.game.stage.backgroundColor = bgColor;
+        this.game.level1map = this.game.add.tilemap('level1');
+        this.game.level1map.addTilesetImage('tileset', 'tiles');
+        this.game.level1map.setCollisionByExclusion([]);
+        this.layer1 = this.game.level1map.createLayer('Tile Layer 1');
         this.layer1.resizeWorld();
+        this.game.stage.backgroundColor = bgColor;
         this.game.physics.arcade.gravity.y = gravityY;
 
         this.game.player = new Player(this.game, playerStartX, playerStartY);
@@ -85,41 +85,10 @@ CrashLanding.Game.prototype = {
             this.game.buttonRight.events.onInputUp.add(function() {this.game.buttonRight._active = false; }.bind(this));
         }
 
-        this.game.explodeTile = function() {
-            var rNum = this.rnd.integerInRange(0, 13);
-            var rNum2 = this.rnd.integerInRange(0, 3);
-            var oldTile, removeX;
-            if (rNum < 10) {
-                if (rNum2 == 3) {
-                    rNum = -rNum;
-                }
-                if (this.game.player) {
-                    if (this.game.player.alive == true) {
-                        removeX = this.game.player.body.x + 64 * rNum;
-                    }
-                } else {
-                    removeX = 10;
-                }
-                oldTile = this.level1map.removeTileWorldXY(removeX, 1140, 64, 64);
-                if (typeof oldTile != 'undefined') {
-                    var newTile = this.game.water.create(oldTile.worldX, oldTile.worldY, 'sprites', 'watertile.png');
-                    newTile.body.allowGravity = false;
-                    newTile.body.setSize(64, 20, 0, 44);
-                    if (rNum2 > 1 && this.game.player.body.x > 5000) {
-                        var newMonster = this.game.monsters.create(newTile.body.x, newTile.body.y + 50, 'sprites', 'alchemymonster.png');
-                        newMonster.body.allowGravity = false;
-                        var top = newTile.body.y - 2500;
-                        var height = this.rnd.integerInRange(800, 1000);
-                        this.game.fx.play('monsterRoar');
-                        this.game.add.tween(newMonster)
-                            .to({ y: height }, 500, Phaser.Easing.Exponential.In)
-                            .to({ y: 1200 }, 700, Phaser.Easing.Linear.None)
-                            .start();
-                    }
-                }
-            }
-        };
-        this.game.timer.loop(500, this.game.explodeTile, this);
+        // TODO fix this - moved to own file, but not ideal
+        this.game.explodeGround = explodeGround;
+
+        this.game.timer.loop(500, this.game.explodeGround, this);
         this.game.timer.start();
 
         this.game.playerInWater = function() {
