@@ -119,69 +119,7 @@ CrashLanding.Game.prototype = {
         this.game.physics.arcade.overlap(this.game.water, this.game.player, this.game.playerInWater, null, this);
         this.game.physics.arcade.overlap(this.game.monsters, this.game.player, this.game.playerInMonster, null, this);
 
-        handleInput.call(this);
-
-        function handleInput() {
-            if (this.game.cursors.left.isDown || this.game.buttonLeft._active) {
-                if (this.game.player.facing != 'left') {
-                    this.game.player.animations.play('running');
-                    this.game.player.facing = 'left';
-                    this.game.player.scale.x = -1;
-                }
-                if (this.game.player.body.velocity.x > -this.game.player.maxSpeed) {
-                    this.game.player.body.velocity.x -= this.game.player.speed;
-                }
-            } else if (this.game.cursors.right.isDown || this.game.buttonRight._active) {
-                if (this.game.player.facing != 'right') {
-                    this.game.player.animations.play('running');
-                    this.game.player.facing = 'right';
-                    this.game.player.scale.x = 1;
-                }
-                if (this.game.player.body.velocity.x < this.game.player.maxSpeed) {
-                    this.game.player.body.velocity.x += this.game.player.speed;
-                }
-            } else {
-                if (this.game.player.facing != 'idle') {
-                    this.game.player.facing = 'idle';
-                    this.game.player.animations.play('idle');
-                }
-                if (this.game.player.body.onFloor()) {
-                    if (this.game.player.body.velocity.x > 0) {
-                        this.game.player.body.velocity.x -= this.game.player.friction;
-                    } else if (this.game.player.body.velocity.x < 0) {
-                        this.game.player.body.velocity.x += this.game.player.friction;
-                    }
-                }
-            }
-            if (this.game.cursors.up.isDown || this.game.buttonA._active) {
-                if (this.game.player.body.onFloor()) {
-                    this.game.fx.play('jump');
-                    this.game.player.doubleJump = false;
-                    this.game.player.body.velocity.y = -400;
-                    this.game.player.jumpTimer = this.game.time.now + 150;
-                } else if (this.game.player.doubleJump == false && this.game.time.now > this.game.player.jumpTimer){ 
-                    this.game.fx.play('jump');
-                    this.game.player.doubleJump = true;
-                    this.game.player.body.velocity.y = -400;
-                }
-            }
-            // Pause Music for dev
-            if (this.game.input.keyboard.isDown(Phaser.Keyboard.M)) {
-                this.game.music.pause();
-            }
-            if (this.game.gameOver == true) {
-                if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-                    this.quitGame();
-                }
-            }
-        }
-
-        if (this.game.input.currentPointers == 0 && !this.game.input.activePointer.isMouse) {
-            this.game.buttonA._active = false;
-            this.game.buttonLeft._active = false;
-            this.game.buttonRight._active = false;
-        }
-
+        handleInput(this.game, this);
 	},
 
 	quitGame: function (pointer) {
