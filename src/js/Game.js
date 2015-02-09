@@ -27,21 +27,25 @@ CrashLanding.Game.prototype = {
 
 
         /** making tiles explode **/
-        var icetile01 = this.game.add.sprite(64, 1030, 'sprites', 'icetile01.png');
+        var icetile01 = this.game.add.sprite(-64, 1030, 'sprites', 'icetile01.png');
         var bmd = this.game.add.bitmapData(64, 64);
         bmd.draw(icetile01, 0, 0, 64, 64);
         bmd.update();
+        icetile01 = null;
         this.game.cache.addBitmapData('icetilebmd', bmd);
-        var icetile02 = this.game.add.sprite(150, 1030, this.game.cache.getBitmapData('icetilebmd'));
         var tempImage = new Image();
         tempImage.src = this.game.cache.getBitmapData('icetilebmd').canvas.toDataURL();
         var iceShatter = new Shatter(tempImage, 8);
         var tempSprites = this.game.add.group();
+        tempSprites.x = 180;
+        tempSprites.y = 960;
 
         iceShatter.images.forEach(function(el, ind, arr) {
             var key = 'ice' + ind;
             this.game.cache.addImage(key, null, el.image);
-            var sprite = tempSprites.create(el.x + 180, el.y + 960, key);
+            var sprite = tempSprites.create(el.x, el.y, key);
+            sprite.originX = el.x;
+            sprite.originY = el.y;
             this.game.physics.arcade.enable(sprite);
             sprite.body.velocity.x = this.game.rnd.integerInRange(-50, 50);
             sprite.body.velocity.y = this.game.rnd.integerInRange(-1000, -500);
@@ -109,7 +113,9 @@ CrashLanding.Game.prototype = {
         }
 
         // TODO fix this - moved to own file, but not ideal
-        this.game.explodeGround = explodeGround;
+        this.game.explodeGround = function() {
+            explodeGround(this.game, tempSprites);
+        };
 
         this.game.timer.loop(500, this.game.explodeGround, this);
         this.game.timer.start();
