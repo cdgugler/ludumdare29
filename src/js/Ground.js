@@ -17,6 +17,7 @@ function explodeGround(game) {
             removeX = 10;
         }
         oldTile = this.game.level1map.removeTileWorldXY(removeX, 1140, tileWidth, tileHeight);
+
         if (typeof oldTile != 'undefined') {
             var newTile = this.game.water.create(oldTile.worldX, oldTile.worldY, 'sprites', 'watertile.png');
             newTile.body.allowGravity = false;

@@ -57,4 +57,3 @@ function handleInput(game, state) {
         game.buttonRight._active = false;
     }
 }
-

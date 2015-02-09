@@ -25,6 +25,29 @@ CrashLanding.Game.prototype = {
         var playerStartY = 1022;
         var bgColor = '#003e7b';
 
+
+        /** making tiles explode **/
+        var icetile01 = this.game.add.sprite(64, 1030, 'sprites', 'icetile01.png');
+        var bmd = this.game.add.bitmapData(64, 64);
+        bmd.draw(icetile01, 0, 0, 64, 64);
+        bmd.update();
+        this.game.cache.addBitmapData('icetilebmd', bmd);
+        var icetile02 = this.game.add.sprite(150, 1030, this.game.cache.getBitmapData('icetilebmd'));
+        var tempImage = new Image();
+        tempImage.src = this.game.cache.getBitmapData('icetilebmd').canvas.toDataURL();
+        var iceShatter = new Shatter(tempImage, 8);
+        var tempSprites = this.game.add.group();
+
+        iceShatter.images.forEach(function(el, ind, arr) {
+            var key = 'ice' + ind;
+            this.game.cache.addImage(key, null, el.image);
+            var sprite = tempSprites.create(el.x + 180, el.y + 960, key);
+            this.game.physics.arcade.enable(sprite);
+            sprite.body.velocity.x = this.game.rnd.integerInRange(-50, 50);
+            sprite.body.velocity.y = this.game.rnd.integerInRange(-1000, -500);
+        }.bind(this));
+        /** making tiles explode **/
+
         this.game.level1map = this.game.add.tilemap('level1');
         this.game.level1map.addTilesetImage('tileset', 'tiles');
         this.game.level1map.setCollisionByExclusion([]);
