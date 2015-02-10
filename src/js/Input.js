@@ -31,16 +31,7 @@ function handleInput(game, state) {
         }
     }
     if (game.cursors.up.isDown || game.buttonA._active) {
-        if (game.player.body.onFloor()) {
-            game.fx.play('jump');
-            game.player.doubleJump = false;
-            game.player.body.velocity.y = -400;
-            game.player.jumpTimer = game.time.now + 150;
-        } else if (game.player.doubleJump == false && game.time.now > game.player.jumpTimer){ 
-            game.fx.play('jump');
-            game.player.doubleJump = true;
-            game.player.body.velocity.y = -400;
-        }
+        game.player.jump();
     }
     // Pause Music for dev
     if (game.input.keyboard.isDown(Phaser.Keyboard.M)) {

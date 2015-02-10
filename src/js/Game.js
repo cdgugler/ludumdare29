@@ -55,8 +55,8 @@ CrashLanding.Game.prototype = {
         this.game.level1map = this.game.add.tilemap('level1');
         this.game.level1map.addTilesetImage('tileset', 'tiles');
         this.game.level1map.setCollisionByExclusion([]);
-        this.layer1 = this.game.level1map.createLayer('Tile Layer 1');
-        this.layer1.resizeWorld();
+        this.game.layer1 = this.game.level1map.createLayer('Tile Layer 1');
+        this.game.layer1.resizeWorld();
         this.game.stage.backgroundColor = bgColor;
         this.game.physics.arcade.gravity.y = gravityY;
 
@@ -119,36 +119,9 @@ CrashLanding.Game.prototype = {
 
         this.game.timer.loop(500, this.game.explodeGround, this);
         this.game.timer.start();
-
-        this.game.playerInWater = function() {
-            this.game.player.kill(); 
-            this.game.fx.play('playerInWater');
-            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '48px Arial', fill: '#fff' });
-		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2 - 50, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
-            this.game.stateText.anchor.setTo(0.5, 0.5);
-            this.game.stateText.text = "THE WATER IS COLD";
-            this.game.stateText.visible = true;
-            this.game.gameOver = true;
-        };
-        this.game.playerInMonster = function() {
-            this.game.player.kill(); 
-            this.game.fx.play('playerEaten');
-            this.game.stateText = this.game.add.text(this.game.camera.x + this.game.width / 2, this.game.camera.y + this.game.height / 2 - 100,' ', { font: '48px Arial', fill: '#fff' });
-		    this.game.exitButton = this.add.button(this.game.camera.x + this.game.width / 2 - 256, this.game.camera.y + this.game.height / 2 - 50, 'sprites', this.quitGame, this, 'button02up.png', 'button02down.png');
-            this.game.stateText.anchor.setTo(0.5, 0.5);
-            this.game.stateText.text = "THEY'RE STILL HUNGRY";
-            this.game.stateText.visible = true;
-            this.game.gameOver = true;
-        };
-
 	},
 
 	update: function () {
-        this.game.physics.arcade.collide(this.game.player, this.layer1);
-        this.game.physics.arcade.overlap(this.game.water, this.game.player, this.game.playerInWater, null, this);
-        this.game.physics.arcade.overlap(this.game.monsters, this.game.player, this.game.playerInMonster, null, this);
-
-        handleInput(this.game, this);
 	},
 
 	quitGame: function (pointer) {
