@@ -26,6 +26,10 @@ CrashLanding.Preloader.prototype = {
         this.load.spritesheet('buttonRight', 'images/right.png', 64, 64);
         this.load.spritesheet('buttonA', 'images/a-button.png', 64, 64);
         this.load.audio('sfx', ['sounds/soundfx.mp3', 'sounds/soundfx.ogg']);
+
+        // TODO - add this sfx to the sfx mp3
+        this.load.audio('waterExplode', ['sounds/waterExplodeProcessed.wav']);
+
         this.load.audio('music', ['sounds/music.mp3', 'sounds/music.ogg']);
 
 	},

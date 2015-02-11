@@ -32,7 +32,7 @@ Player.prototype.die = function (state, message, audioFx) {
     var fontColor = '#fff';
 
     state.game.player.kill(); 
-    state.game.fx.play(audioFx);
+    state.game.fx.play(audioFx, .4);
     state.game.stateText = state.game.add.text(centerX, centerY - 100, ' ', { font: fontSizeType, fill: fontColor });
     state.game.exitButton = state.add.button(centerX - 256, centerY - 50, 'sprites', state.quitGame, state, 'button02up.png', 'button02down.png');
     state.game.stateText.anchor.setTo(0.5, 0.5);

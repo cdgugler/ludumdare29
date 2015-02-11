@@ -26,31 +26,12 @@ CrashLanding.Game.prototype = {
         var bgColor = '#003e7b';
 
 
-        /** making tiles explode **/
-        var icetile01 = this.game.add.sprite(-64, 1030, 'sprites', 'icetile01.png');
-        var bmd = this.game.add.bitmapData(64, 64);
-        bmd.draw(icetile01, 0, 0, 64, 64);
-        bmd.update();
-        icetile01 = null;
-        this.game.cache.addBitmapData('icetilebmd', bmd);
-        var tempImage = new Image();
-        tempImage.src = this.game.cache.getBitmapData('icetilebmd').canvas.toDataURL();
-        var iceShatter = new Shatter(tempImage, 8);
-        var tempSprites = this.game.add.group();
-        tempSprites.x = 180;
-        tempSprites.y = 960;
+        this.game.iceShatter01 = ShatterSprite(this.game, 'sprites', 'icetile01.png');
+        this.game.iceShatter02 = ShatterSprite(this.game, 'sprites', 'icetile02.png');
+        this.game.iceShatter03 = ShatterSprite(this.game, 'sprites', 'icetile03.png');
+        this.game.shatteredIce = [this.game.iceShatter01, this.game.iceShatter02, this.game.iceShatter03];
 
-        iceShatter.images.forEach(function(el, ind, arr) {
-            var key = 'ice' + ind;
-            this.game.cache.addImage(key, null, el.image);
-            var sprite = tempSprites.create(el.x, el.y, key);
-            sprite.originX = el.x;
-            sprite.originY = el.y;
-            this.game.physics.arcade.enable(sprite);
-            sprite.body.velocity.x = this.game.rnd.integerInRange(-50, 50);
-            sprite.body.velocity.y = this.game.rnd.integerInRange(-1000, -500);
-        }.bind(this));
-        /** making tiles explode **/
+        this.game.waterExplode = this.game.add.audio('waterExplode');
 
         this.game.level1map = this.game.add.tilemap('level1');
         this.game.level1map.addTilesetImage('tileset', 'tiles');
@@ -114,7 +95,9 @@ CrashLanding.Game.prototype = {
 
         // TODO fix this - moved to own file, but not ideal
         this.game.explodeGround = function() {
-            explodeGround(this.game, tempSprites);
+            this.counter = this.counter || 0;
+            explodeGround(this.game, this.game.shatteredIce[this.counter % 3]);
+            this.counter++;
         };
 
         this.game.timer.loop(500, this.game.explodeGround, this);
@@ -122,6 +105,7 @@ CrashLanding.Game.prototype = {
 	},
 
 	update: function () {
+        this.game.physics.arcade.collide(this.game.iceShatter01, this.game.layer1, null, null, this);
 	},
 
 	quitGame: function (pointer) {

@@ -27,6 +27,7 @@ function explodeGround(game, exploder) {
                 sprite.body.velocity.x = game.rnd.integerInRange(-50, 50);
                 sprite.body.velocity.y = game.rnd.integerInRange(-1000, -500);
             });
+           game.waterExplode.play('', 0, .3);
 
             var newTile = game.water.create(oldTile.worldX, oldTile.worldY, 'sprites', 'watertile.png');
             newTile.body.allowGravity = false;
