@@ -2,16 +2,11 @@ function explodeGround(game, exploder) {
     var tileWidth = 64;
     var tileHeight = 64;
 
-    var rNum = game.rnd.integerInRange(0, 13);
-    var rNum2 = game.rnd.integerInRange(0, 3);
     var oldTile, removeX;
-    if (rNum < 10) {
-        if (rNum2 == 3) {
-            rNum = -rNum;
-        }
+    if (randomPercent(game, 71)) {
         if (game.player) {
             if (game.player.alive == true) {
-                removeX = game.player.body.x + tileWidth * rNum;
+                removeX = game.player.body.x + tileWidth * game.rnd.integerInRange(-3, 13);
             }
         } else {
             removeX = 10;
@@ -32,7 +27,7 @@ function explodeGround(game, exploder) {
             var newTile = game.water.create(oldTile.worldX, oldTile.worldY, 'sprites', 'watertile.png');
             newTile.body.allowGravity = false;
             newTile.body.setSize(tileWidth, 20, 0, 44);
-            if (rNum2 > 1 && game.player.body.x > 5000) {
+            if (randomPercent(game, 50) && game.player.body.x > 5000) {
                 var newMonster = game.monsters.create(newTile.body.x, newTile.body.y + 50, 'sprites', 'alchemymonster.png');
                 newMonster.body.allowGravity = false;
                 var top = newTile.body.y - 2500;
@@ -46,3 +41,7 @@ function explodeGround(game, exploder) {
         }
     }
 };
+
+function randomPercent(game, percent) {
+    return game.rnd.integerInRange(1, 100) < percent;
+}
