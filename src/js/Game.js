@@ -62,36 +62,7 @@ CrashLanding.Game.prototype = {
 
         this.game.fx = initAudio(this.game);
 
-        // Set up to avoid errors on desktop
-        this.game.buttonA = {};
-        this.game.buttonLeft = {};
-        this.game.buttonRight = {};
-
-        // TODO Move this to it's own class
-        // add mobile gamepad
-        // Should check for desktop and only display if not?
-        if (!this.game.device.desktop) { 
-            this.game.buttonA = this.game.add.button(this.game.width - 70, this.game.height - 68, 'buttonA', null, this, 0, 0, 0, 0);
-            this.game.buttonA.fixedToCamera = true;
-            this.game.buttonA.events.onInputOver.add(function() {this.game.buttonA._active = true; }.bind(this));
-            this.game.buttonA.events.onInputDown.add(function() {this.game.buttonA._active = true; }.bind(this));
-            this.game.buttonA.events.onInputOut.add(function() {this.game.buttonA._active = false; }.bind(this));
-            this.game.buttonA.events.onInputUp.add(function() {this.game.buttonA._active = false; }.bind(this));
-
-            this.game.buttonLeft = this.game.add.button(12, this.game.height - 68, 'buttonLeft', null, this, 0, 0, 0, 0);
-            this.game.buttonLeft.fixedToCamera = true;
-            this.game.buttonLeft.events.onInputOver.add(function() {this.game.buttonLeft._active = true; }.bind(this));
-            this.game.buttonLeft.events.onInputDown.add(function() {this.game.buttonLeft._active = true; }.bind(this));
-            this.game.buttonLeft.events.onInputOut.add(function() {this.game.buttonLeft._active = false; }.bind(this));
-            this.game.buttonLeft.events.onInputUp.add(function() {this.game.buttonLeft._active = false; }.bind(this));
-
-            this.game.buttonRight = this.game.add.button(88, this.game.height - 68, 'buttonRight', null, this, 0, 0, 0, 0);
-            this.game.buttonRight.fixedToCamera = true;
-            this.game.buttonRight.events.onInputOver.add(function() {this.game.buttonRight._active = true; }.bind(this));
-            this.game.buttonRight.events.onInputDown.add(function() {this.game.buttonRight._active = true; }.bind(this));
-            this.game.buttonRight.events.onInputOut.add(function() {this.game.buttonRight._active = false; }.bind(this));
-            this.game.buttonRight.events.onInputUp.add(function() {this.game.buttonRight._active = false; }.bind(this));
-        }
+        mobileGamePad(this.game, this);
 
         // TODO fix this - moved to own file, but not ideal
         this.game.explodeGround = function() {
