@@ -41,7 +41,7 @@ CrashLanding.Game.prototype = {
         this.game.stage.backgroundColor = bgColor;
         this.game.physics.arcade.gravity.y = gravityY;
 
-        this.game.player = new Player(this.game, playerStartX, playerStartY);
+        this.game.player = new CrashLanding.Util.Player(this.game, playerStartX, playerStartY);
 
         this.game.camera.follow(this.game.player);
         this.game.cursors = this.game.input.keyboard.createCursorKeys();

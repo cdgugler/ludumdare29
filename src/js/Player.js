@@ -3,7 +3,7 @@
  *
  */
 
-function Player(game, x, y) {
+CrashLanding.Util.Player = function Player(game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'sprites', 'standing.png');
 
     game.add.existing(this);
@@ -22,10 +22,10 @@ function Player(game, x, y) {
     this.doubleJump = false;
 };
 
-Player.prototype = Object.create(Phaser.Sprite.prototype);
-Player.prototype.constructor = Player;
+CrashLanding.Util.Player.prototype = Object.create(Phaser.Sprite.prototype);
+CrashLanding.Util.Player.prototype.constructor = CrashLanding.Util.Player;
 
-Player.prototype.die = function (state, message, audioFx) {
+CrashLanding.Util.Player.prototype.die = function (state, message, audioFx) {
     var centerX = state.game.camera.x + state.game.width / 2;
     var centerY = state.game.camera.y + state.game.height / 2;
     var fontSizeType = '48px Arial';
@@ -42,15 +42,15 @@ Player.prototype.die = function (state, message, audioFx) {
     state.game.timer.stop();
 }
 
-Player.prototype.waterDeath = function() {
+CrashLanding.Util.Player.prototype.waterDeath = function() {
     this.die(this.game.state.getCurrentState(), 'THE WATER IS COLD', 'playerInWater');
 }
 
-Player.prototype.monsterDeath = function() {
+CrashLanding.Util.Player.prototype.monsterDeath = function() {
     this.die(this.game.state.getCurrentState(), 'THEY\'RE STILL HUNGRY', 'playerEaten');
 }
 
-Player.prototype.jump = function() {
+CrashLanding.Util.Player.prototype.jump = function() {
     if (this.body.onFloor() || this.body.touching.down) {
         this.game.fx.play('jump');
         this.doubleJump = false;
@@ -63,7 +63,7 @@ Player.prototype.jump = function() {
     }
 }
 
-Player.prototype.update = function() {
+CrashLanding.Util.Player.prototype.update = function() {
     this.game.physics.arcade.collide(this.game.player, this.game.layer1, null, null, this);
     this.game.physics.arcade.overlap(this.game.water, this.game.player, this.waterDeath, null, this);
     this.game.physics.arcade.overlap(this.game.monsters, this.game.player, this.monsterDeath, null, this);

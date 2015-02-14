@@ -1,4 +1,5 @@
 var CrashLanding = {};
+CrashLanding.Util = {};
 
 CrashLanding.Boot = function (game) {
 };
