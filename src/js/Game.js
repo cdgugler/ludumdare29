@@ -26,6 +26,7 @@ CrashLanding.Game.prototype = {
         var bgColor = '#003e7b';
 
 
+
         this.game.iceShatter01 = ShatterSprite(this.game, 'sprites', 'icetile01.png');
         this.game.iceShatter02 = ShatterSprite(this.game, 'sprites', 'icetile02.png');
         this.game.iceShatter03 = ShatterSprite(this.game, 'sprites', 'icetile03.png');
@@ -73,6 +74,24 @@ CrashLanding.Game.prototype = {
 
         this.game.timer.loop(500, this.game.explodeGround, this);
         this.game.timer.start();
+
+        this.game.score = this.game.add.text(10, 10, "Score: ", {
+            font: '14px monospace',
+            fill: '#ffffff'
+        });
+        this.game.score.fixedToCamera = true;
+        this.game.scoreNum = 0;
+        this.game.scoreMultiplier = 1;
+        this.game.gameTime = this.game.time.create(this.game);
+        this.game.gameTimerEvent = this.game.gameTime.add(250, function() {
+            this.game.scoreMultiplier += 1;
+            if (this.game.player && this.game.player.alive) {
+                this.game.scoreNum += this.game.scoreMultiplier * Math.abs(this.game.player.body.velocity.x) / 400;
+            }
+            this.game.score.text = 'Score: ' + Math.floor(this.game.scoreNum);
+        }, this);
+        this.game.gameTimerEvent.loop = true;
+        this.game.gameTime.start();
 	},
 
 	update: function () {
