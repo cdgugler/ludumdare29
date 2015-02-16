@@ -30,11 +30,11 @@ function explodeGround(game, exploder) {
             });
             game.waterExplode.play('', 0, .3);
 
-            var newTile = game.water.create(oldTile.worldX, oldTile.worldY, 'sprites', 'watertile.png');
+            var newTile = game.water.create(oldTile.worldX, oldTile.worldY, 'sprites', 'watertile');
             newTile.body.allowGravity = false;
             newTile.body.setSize(tileWidth, 20, 0, 44);
             if (randomPercent(game, 50) && game.player.body.x > monstersSpawnPosition) {
-                var newMonster = game.monsters.create(newTile.body.x, newTile.body.y + 50, 'sprites', 'alchemymonster.png');
+                var newMonster = game.monsters.create(newTile.body.x, newTile.body.y + 50, 'sprites', 'alchemymonster');
                 newMonster.body.allowGravity = false;
                 var top = newTile.body.y - 2500;
                 var height = game.rnd.integerInRange(800, 1000);

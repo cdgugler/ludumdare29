@@ -4,7 +4,7 @@
  */
 
 CrashLanding.Util.Player = function Player(game, x, y) {
-    Phaser.Sprite.call(this, game, x, y, 'sprites', 'standing.png');
+    Phaser.Sprite.call(this, game, x, y, 'sprites', 'standing');
 
     game.add.existing(this);
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -12,8 +12,8 @@ CrashLanding.Util.Player = function Player(game, x, y) {
     this.body.setSize(32, 64, 0, 0);
     this.facing = 'right';
     this.anchor.setTo(.5,.5); // so we can flip it
-    this.animations.add('running', ['0000.png', '0006.png', '0012.png', '0018.png', '0024.png', '0030.png', '0036.png', '0042.png'], 10, true);
-    this.animations.add('idle', ['standing.png'], false, false);
+    this.animations.add('running', ['0000', '0006', '0012', '0018', '0024', '0030', '0036', '0042'], 10, true);
+    this.animations.add('idle', ['standing'], false, false);
     this.maxSpeed = 500;
     this.speed = 10;
     this.friction = 3;
@@ -34,7 +34,7 @@ CrashLanding.Util.Player.prototype.die = function (state, message, audioFx) {
     state.game.player.kill(); 
     state.game.fx.play(audioFx, .4);
     state.game.stateText = state.game.add.text(centerX, centerY - 100, ' ', { font: fontSizeType, fill: fontColor });
-    state.game.exitButton = state.add.button(centerX - 256, centerY - 50, 'sprites', state.quitGame, state, 'button02up.png', 'button02down.png');
+    state.game.exitButton = state.add.button(centerX - 256, centerY - 50, 'sprites', state.quitGame, state, 'button02up', 'button02down');
     state.game.stateText.anchor.setTo(0.5, 0.5);
     state.game.stateText.text = message;
     state.game.stateText.visible = true;

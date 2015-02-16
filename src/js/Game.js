@@ -27,9 +27,9 @@ CrashLanding.Game.prototype = {
 
 
 
-        this.game.iceShatter01 = ShatterSprite(this.game, 'sprites', 'icetile01.png');
-        this.game.iceShatter02 = ShatterSprite(this.game, 'sprites', 'icetile02.png');
-        this.game.iceShatter03 = ShatterSprite(this.game, 'sprites', 'icetile03.png');
+        this.game.iceShatter01 = ShatterSprite(this.game, 'sprites', 'icetile01');
+        this.game.iceShatter02 = ShatterSprite(this.game, 'sprites', 'icetile02');
+        this.game.iceShatter03 = ShatterSprite(this.game, 'sprites', 'icetile03');
         this.game.shatteredIce = [this.game.iceShatter01, this.game.iceShatter02, this.game.iceShatter03];
 
         this.game.waterExplode = this.game.add.audio('waterExplode');
