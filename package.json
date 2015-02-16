@@ -1,0 +1,26 @@
+{
+  "name": "CrashLanding",
+  "version": "0.0.0",
+  "description": "Idea started for Ludum Dare 29, theme 'Beneath the Surface'. See it in action here: [Crash Landing](http://cdgugler.github.io/ludumdare29/)",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "~3.8.11",
+    "gulp.spritesmith": "~2.5.1"
+  },
+  "devDependencies": {
+    "gulp-imagemin": "^2.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cdgugler/ludumdare29.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdgugler/ludumdare29/issues"
+  },
+  "homepage": "https://github.com/cdgugler/ludumdare29"
+}
