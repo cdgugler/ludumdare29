@@ -25,6 +25,7 @@ CrashLanding.Game.prototype = {
         var playerStartY = 1022;
         var bgColor = '#003e7b';
 
+
         this.game.iceShatter01 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile01');
         this.game.iceShatter02 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile02');
         this.game.iceShatter03 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile03');
@@ -32,9 +33,13 @@ CrashLanding.Game.prototype = {
 
         this.game.waterExplode = this.game.add.audio('waterExplode');
 
+
         this.game.level1map = this.game.add.tilemap('level1');
         this.game.level1map.addTilesetImage('tileset', 'tiles');
         this.game.level1map.setCollisionByExclusion([]);
+        this.game.backgroundMountains = this.game.add.tileSprite(0, 64, this.game.level1map.widthInPixels, 296, 'mountainsbg');
+        this.game.backgroundMountains.fixedToCamera = true;
+        this.game.world.sendToBack(this.game.backgroundMountains);
         this.game.layer1 = this.game.level1map.createLayer('Tile Layer 1');
         this.game.layer1.resizeWorld();
         this.game.stage.backgroundColor = bgColor;
@@ -89,10 +94,19 @@ CrashLanding.Game.prototype = {
         }, this);
         this.game.gameTimerEvent.loop = true;
         this.game.gameTime.start();
+
+
 	},
 
 	update: function () {
         this.game.physics.arcade.collide(this.game.iceShatter01, this.game.layer1, null, null, this);
+
+        if (this.game.player.alive && this.game.player.body.velocity.x > 10) {
+            this.game.backgroundMountains.tilePosition.x -= .3;
+        }
+        if (this.game.player.alive && this.game.player.body.velocity.x < -10) {
+            this.game.backgroundMountains.tilePosition.x += .3;
+        }
 	},
 
 	quitGame: function (pointer) {

@@ -13,6 +13,7 @@ CrashLanding.Preloader.prototype = {
 
 		this.background = this.add.sprite(0, 0, 'preloaderBackground');
 		this.preloadBar = this.add.sprite(this.game.centerX, this.game.centerY, 'preloaderBar');
+        this.load.image('mountainsbg', 'images/mountains-mirrored.png');
 
 		//	This sets the preloadBar sprite as a loader sprite.
 		//	What that does is automatically crop the sprite from 0 to full-width
