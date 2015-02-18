@@ -68,6 +68,6 @@ CrashLanding.Sprite.Player.prototype.update = function() {
     this.game.physics.arcade.overlap(this.game.water, this.game.player, this.waterDeath, null, this);
     this.game.physics.arcade.overlap(this.game.monsters, this.game.player, this.monsterDeath, null, this);
 
-    handleInput(this.game, this.game.state.getCurrentState());
+    CrashLanding.Util.handleInput(this.game, this.game.state.getCurrentState());
 }
 

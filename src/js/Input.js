@@ -1,4 +1,4 @@
-function handleInput(game, state) {
+CrashLanding.Util.handleInput = function (game, state) {
     if (game.cursors.left.isDown || game.buttonLeft._active) {
         if (game.player.facing != 'left') {
             game.player.animations.play('running');

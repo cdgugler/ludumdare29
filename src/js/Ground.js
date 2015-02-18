@@ -1,4 +1,4 @@
-function explodeGround(game, exploder) {
+CrashLanding.Util.explodeGround = function explodeGround(game, exploder) {
     var tileWidth = 64;
     var tileHeight = 64;
     var groundLevel = 1140;

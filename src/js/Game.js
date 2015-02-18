@@ -65,7 +65,7 @@ CrashLanding.Game.prototype = {
         // TODO fix this - moved to own file, but not ideal
         this.game.explodeGround = function() {
             this.counter = this.counter || 0;
-            explodeGround(this.game, this.game.shatteredIce[this.counter % 3]);
+            CrashLanding.Util.explodeGround(this.game, this.game.shatteredIce[this.counter % 3]);
             this.counter++;
         };
 
