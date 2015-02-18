@@ -25,8 +25,6 @@ CrashLanding.Game.prototype = {
         var playerStartY = 1022;
         var bgColor = '#003e7b';
 
-
-
         this.game.iceShatter01 = ShatterSprite(this.game, 'sprites', 'icetile01');
         this.game.iceShatter02 = ShatterSprite(this.game, 'sprites', 'icetile02');
         this.game.iceShatter03 = ShatterSprite(this.game, 'sprites', 'icetile03');
@@ -42,7 +40,7 @@ CrashLanding.Game.prototype = {
         this.game.stage.backgroundColor = bgColor;
         this.game.physics.arcade.gravity.y = gravityY;
 
-        this.game.player = new CrashLanding.Util.Player(this.game, playerStartX, playerStartY);
+        this.game.player = new CrashLanding.Sprite.Player(this.game, playerStartX, playerStartY);
 
         this.game.camera.follow(this.game.player);
         this.game.cursors = this.game.input.keyboard.createCursorKeys();
@@ -58,7 +56,6 @@ CrashLanding.Game.prototype = {
         // TODO Move monsters to own class
         this.game.monsters = this.game.add.group();
         this.game.monsters.enableBody = true;
-        // this.game.monster.body.setSize(62, 128, 0, 0);
         this.game.monsters.physicsBodyType = Phaser.Physics.ARCADE;
 
         this.game.fx = initAudio(this.game);

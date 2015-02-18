@@ -1,5 +1,6 @@
 var CrashLanding = {};
 CrashLanding.Util = {};
+CrashLanding.Sprite = {};
 
 CrashLanding.Boot = function (game) {
 };

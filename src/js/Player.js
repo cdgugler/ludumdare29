@@ -3,7 +3,7 @@
  *
  */
 
-CrashLanding.Util.Player = function Player(game, x, y) {
+CrashLanding.Sprite.Player = function Player(game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'sprites', 'standing');
 
     game.add.existing(this);
@@ -22,10 +22,10 @@ CrashLanding.Util.Player = function Player(game, x, y) {
     this.doubleJump = false;
 };
 
-CrashLanding.Util.Player.prototype = Object.create(Phaser.Sprite.prototype);
-CrashLanding.Util.Player.prototype.constructor = CrashLanding.Util.Player;
+CrashLanding.Sprite.Player.prototype = Object.create(Phaser.Sprite.prototype);
+CrashLanding.Sprite.Player.prototype.constructor = CrashLanding.Sprite.Player;
 
-CrashLanding.Util.Player.prototype.die = function (state, message, audioFx) {
+CrashLanding.Sprite.Player.prototype.die = function (state, message, audioFx) {
     var centerX = state.game.camera.x + state.game.width / 2;
     var centerY = state.game.camera.y + state.game.height / 2;
     var fontSizeType = '48px Arial';
@@ -42,15 +42,15 @@ CrashLanding.Util.Player.prototype.die = function (state, message, audioFx) {
     state.game.timer.stop();
 }
 
-CrashLanding.Util.Player.prototype.waterDeath = function() {
+CrashLanding.Sprite.Player.prototype.waterDeath = function() {
     this.die(this.game.state.getCurrentState(), 'THE WATER IS COLD', 'playerInWater');
 }
 
-CrashLanding.Util.Player.prototype.monsterDeath = function() {
+CrashLanding.Sprite.Player.prototype.monsterDeath = function() {
     this.die(this.game.state.getCurrentState(), 'THEY\'RE STILL HUNGRY', 'playerEaten');
 }
 
-CrashLanding.Util.Player.prototype.jump = function() {
+CrashLanding.Sprite.Player.prototype.jump = function() {
     if (this.body.onFloor() || this.body.touching.down) {
         this.game.fx.play('jump');
         this.doubleJump = false;
@@ -63,7 +63,7 @@ CrashLanding.Util.Player.prototype.jump = function() {
     }
 }
 
-CrashLanding.Util.Player.prototype.update = function() {
+CrashLanding.Sprite.Player.prototype.update = function() {
     this.game.physics.arcade.collide(this.game.player, this.game.layer1, null, null, this);
     this.game.physics.arcade.overlap(this.game.water, this.game.player, this.waterDeath, null, this);
     this.game.physics.arcade.overlap(this.game.monsters, this.game.player, this.monsterDeath, null, this);
