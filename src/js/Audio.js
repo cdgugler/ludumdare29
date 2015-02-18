@@ -1,4 +1,4 @@
-function initAudio(game) {
+CrashLanding.Util.initAudio = function initAudio(game) {
     var fx = game.add.audio('sfx');
     fx.addMarker('monsterRoar', 2, 1.2);
     fx.addMarker('playerEaten', 5, 0.5);

@@ -1,4 +1,4 @@
-function ShatterSprite(game, key, frame) {
+CrashLanding.Util.ShatterSprite = function ShatterSprite(game, key, frame) {
     var sprite = game.add.sprite(-1000, -1000, key, frame);
     var bmd = game.add.bitmapData(sprite.width, sprite.height);
     bmd.draw(sprite, 0, 0, sprite.width, sprite.height);

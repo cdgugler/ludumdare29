@@ -1,4 +1,4 @@
-function mobileGamePad(game, state) {
+CrashLanding.Util.mobileGamePad = function mobileGamePad(game, state) {
     // Set up to avoid errors on desktop
     game.buttonA = {};
     game.buttonLeft = {};

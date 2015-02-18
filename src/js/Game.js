@@ -25,9 +25,9 @@ CrashLanding.Game.prototype = {
         var playerStartY = 1022;
         var bgColor = '#003e7b';
 
-        this.game.iceShatter01 = ShatterSprite(this.game, 'sprites', 'icetile01');
-        this.game.iceShatter02 = ShatterSprite(this.game, 'sprites', 'icetile02');
-        this.game.iceShatter03 = ShatterSprite(this.game, 'sprites', 'icetile03');
+        this.game.iceShatter01 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile01');
+        this.game.iceShatter02 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile02');
+        this.game.iceShatter03 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile03');
         this.game.shatteredIce = [this.game.iceShatter01, this.game.iceShatter02, this.game.iceShatter03];
 
         this.game.waterExplode = this.game.add.audio('waterExplode');
@@ -58,9 +58,9 @@ CrashLanding.Game.prototype = {
         this.game.monsters.enableBody = true;
         this.game.monsters.physicsBodyType = Phaser.Physics.ARCADE;
 
-        this.game.fx = initAudio(this.game);
+        this.game.fx = CrashLanding.Util.initAudio(this.game);
 
-        mobileGamePad(this.game, this);
+        CrashLanding.Util.mobileGamePad(this.game, this);
 
         // TODO fix this - moved to own file, but not ideal
         this.game.explodeGround = function() {
