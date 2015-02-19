@@ -23,9 +23,6 @@ CrashLanding.Preloader.prototype = {
 		this.load.atlasJSONHash('sprites', 'build/images/sprites.png', 'build/images/sprites.json');
         this.load.tilemap('level1', 'maps/level1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles', 'images/tiles.png');
-        this.load.spritesheet('buttonLeft', 'src/images/sprites/left.png', 64, 64);
-        this.load.spritesheet('buttonRight', 'src/images/sprites/right.png', 64, 64);
-        this.load.spritesheet('buttonA', 'images/sprites/a-button.png', 64, 64);
         this.load.audio('sfx', ['sounds/soundfx.mp3', 'sounds/soundfx.ogg']);
 
         // TODO - add this sfx to the sfx mp3
