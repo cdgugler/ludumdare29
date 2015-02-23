@@ -26,7 +26,6 @@ CrashLanding.Game.prototype = {
         var bgColor = '#003e7b';
         this.game.shattered = {};
 
-
         this.game.shatteredIce = CrashLanding.Util.ShatterArray(this.game, 'sprites', ['icetile01', 'icetile02', 'icetile03']);
 
         this.game.waterExplode = this.game.add.audio('waterExplode');
@@ -35,7 +34,7 @@ CrashLanding.Game.prototype = {
         this.game.level1map = this.game.add.tilemap('level1');
         this.game.level1map.addTilesetImage('tileset', 'tiles');
         this.game.level1map.setCollisionByExclusion([]);
-        this.game.backgroundMountains = this.game.add.tileSprite(0, 64, this.game.level1map.widthInPixels, 296, 'mountainsbg');
+        this.game.backgroundMountains = this.game.add.tileSprite(0, 64, this.game.level1map.widthInPixels, 316, 'mountainsbg');
         this.game.backgroundMountains.fixedToCamera = true;
         this.game.world.sendToBack(this.game.backgroundMountains);
         this.game.layer1 = this.game.level1map.createLayer('Tile Layer 1');
@@ -44,8 +43,10 @@ CrashLanding.Game.prototype = {
         this.game.physics.arcade.gravity.y = gravityY;
 
         this.game.player = new CrashLanding.Sprite.Player(this.game, playerStartX, playerStartY);
+        this.game.shaker = new CrashLanding.Sprite.Shaker(this.game, playerStartX, playerStartY);
 
         this.game.camera.follow(this.game.player);
+
         this.game.cursors = this.game.input.keyboard.createCursorKeys();
         this.game.gameOver = false;
 

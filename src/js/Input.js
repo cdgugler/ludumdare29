@@ -37,6 +37,12 @@ CrashLanding.Util.handleInput = function (game, state) {
     if (game.input.keyboard.isDown(Phaser.Keyboard.M)) {
         game.music.pause();
     }
+    if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
+        game.shaker.shake(5, 2);
+    }
+    if (game.input.keyboard.isDown(Phaser.Keyboard.E)) {
+        game.camera.follow(game.player);
+    }
     if (game.gameOver == true) {
         if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             state.quitGame();

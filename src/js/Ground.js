@@ -29,6 +29,9 @@ CrashLanding.Util.explodeGround = function explodeGround(game, exploder) {
                 sprite.body.velocity.y = game.rnd.integerInRange(yVelocityMin, yVelocityMax);
             });
             game.waterExplode.play('', 0, .3);
+            if (!game.shaker.shaking) {
+                game.shaker.shake(4, 1);
+            }
 
             var newTile = game.water.create(oldTile.worldX, oldTile.worldY, 'sprites', 'watertile');
             newTile.body.allowGravity = false;
