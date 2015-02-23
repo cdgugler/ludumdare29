@@ -24,12 +24,10 @@ CrashLanding.Game.prototype = {
         var playerStartX = 10;
         var playerStartY = 1022;
         var bgColor = '#003e7b';
+        this.game.shattered = {};
 
 
-        this.game.iceShatter01 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile01');
-        this.game.iceShatter02 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile02');
-        this.game.iceShatter03 = CrashLanding.Util.ShatterSprite(this.game, 'sprites', 'icetile03');
-        this.game.shatteredIce = [this.game.iceShatter01, this.game.iceShatter02, this.game.iceShatter03];
+        this.game.shatteredIce = CrashLanding.Util.ShatterArray(this.game, 'sprites', ['icetile01', 'icetile02', 'icetile03']);
 
         this.game.waterExplode = this.game.add.audio('waterExplode');
 
@@ -99,7 +97,7 @@ CrashLanding.Game.prototype = {
 	},
 
 	update: function () {
-        this.game.physics.arcade.collide(this.game.iceShatter01, this.game.layer1, null, null, this);
+        this.game.physics.arcade.collide(this.game.shatteredIce, this.game.layer1, null, null, this);
 
         if (this.game.player.alive && this.game.player.body.velocity.x > 10) {
             this.game.backgroundMountains.tilePosition.x -= .3;
