@@ -63,6 +63,42 @@ CrashLanding.Sprite.Player.prototype.jump = function() {
     }
 }
 
+CrashLanding.Sprite.Player.prototype.moveLeft = function() {
+    if (this.game.player.facing != 'left') {
+        this.game.player.animations.play('running');
+        this.game.player.facing = 'left';
+        this.game.player.scale.x = -1;
+    }
+    if (this.game.player.body.velocity.x > -this.game.player.maxSpeed) {
+        this.game.player.body.velocity.x -= this.game.player.speed;
+    }
+}
+
+CrashLanding.Sprite.Player.prototype.moveRight = function() {
+    if (this.game.player.facing != 'right') {
+        this.game.player.animations.play('running');
+        this.game.player.facing = 'right';
+        this.game.player.scale.x = 1;
+    }
+    if (this.game.player.body.velocity.x < this.game.player.maxSpeed) {
+        this.game.player.body.velocity.x += this.game.player.speed;
+    }
+}
+
+CrashLanding.Sprite.Player.prototype.standStill = function() {
+    if (this.game.player.facing != 'idle') {
+        this.game.player.facing = 'idle';
+        this.game.player.animations.play('idle');
+    }
+    if (this.game.player.body.onFloor()) {
+        if (this.game.player.body.velocity.x > 0) {
+            this.game.player.body.velocity.x -= this.game.player.friction;
+        } else if (this.game.player.body.velocity.x < 0) {
+            this.game.player.body.velocity.x += this.game.player.friction;
+        }
+    }
+}
+
 CrashLanding.Sprite.Player.prototype.update = function() {
     this.game.physics.arcade.collide(this.game.player, this.game.layer1, null, null, this);
     this.game.physics.arcade.overlap(this.game.water, this.game.player, this.waterDeath, null, this);

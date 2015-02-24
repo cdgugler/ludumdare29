@@ -1,47 +1,17 @@
 CrashLanding.Util.handleInput = function (game, state) {
-    if (game.cursors.left.isDown || game.buttonLeft._active) {
-        if (game.player.facing != 'left') {
-            game.player.animations.play('running');
-            game.player.facing = 'left';
-            game.player.scale.x = -1;
-        }
-        if (game.player.body.velocity.x > -game.player.maxSpeed) {
-            game.player.body.velocity.x -= game.player.speed;
-        }
-    } else if (game.cursors.right.isDown || game.buttonRight._active) {
-        if (game.player.facing != 'right') {
-            game.player.animations.play('running');
-            game.player.facing = 'right';
-            game.player.scale.x = 1;
-        }
-        if (game.player.body.velocity.x < game.player.maxSpeed) {
-            game.player.body.velocity.x += game.player.speed;
-        }
+    if (game.cursors.left.isDown || game.buttonLeft._active || game.input.keyboard.isDown(Phaser.Keyboard.A)) {
+        game.player.moveLeft();
+    } else if (game.cursors.right.isDown || game.buttonRight._active || game.input.keyboard.isDown(Phaser.Keyboard.D)) {
+        game.player.moveRight();
     } else {
-        if (game.player.facing != 'idle') {
-            game.player.facing = 'idle';
-            game.player.animations.play('idle');
-        }
-        if (game.player.body.onFloor()) {
-            if (game.player.body.velocity.x > 0) {
-                game.player.body.velocity.x -= game.player.friction;
-            } else if (game.player.body.velocity.x < 0) {
-                game.player.body.velocity.x += game.player.friction;
-            }
-        }
+        game.player.standStill();
     }
-    if (game.cursors.up.isDown || game.buttonA._active) {
+    if (game.cursors.up.isDown || game.buttonA._active || game.input.keyboard.isDown(Phaser.Keyboard.W)) {
         game.player.jump();
     }
     // Pause Music for dev
     if (game.input.keyboard.isDown(Phaser.Keyboard.M)) {
-        game.music.pause();
-    }
-    if (game.input.keyboard.isDown(Phaser.Keyboard.W)) {
-        game.shaker.shake(5, 2);
-    }
-    if (game.input.keyboard.isDown(Phaser.Keyboard.E)) {
-        game.camera.follow(game.player);
+        game.sound.mute = true;
     }
     if (game.gameOver == true) {
         if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
