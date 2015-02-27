@@ -24,26 +24,32 @@ CrashLanding.Game.prototype = {
         var playerStartX = 10;
         var playerStartY = 1022;
         var bgColor = '#003e7b';
+
         this.game.shattered = {};
-
         this.game.shatteredIce = CrashLanding.Util.ShatterArray(this.game, 'sprites', ['icetile01', 'icetile02', 'icetile03']);
-
         this.game.waterExplode = this.game.add.audio('waterExplode');
-
+        this.game.physics.enable(this, Phaser.Physics.ARCADE);
 
         this.game.level1map = this.game.add.tilemap('level1');
         this.game.level1map.addTilesetImage('tileset', 'tiles');
         this.game.level1map.setCollisionByExclusion([]);
+        this.game.layer1 = this.game.level1map.createLayer('Tile Layer 1');
+        this.game.layer1.resizeWorld();
+
+        this.game.stage.backgroundColor = bgColor;
         this.game.backgroundMountains = this.game.add.tileSprite(0, 64, this.game.level1map.widthInPixels, 316, 'mountainsbg');
         this.game.backgroundMountains.fixedToCamera = true;
         this.game.world.sendToBack(this.game.backgroundMountains);
-        this.game.layer1 = this.game.level1map.createLayer('Tile Layer 1');
-        this.game.layer1.resizeWorld();
-        this.game.stage.backgroundColor = bgColor;
         this.game.physics.arcade.gravity.y = gravityY;
 
         this.game.player = new CrashLanding.Sprite.Player(this.game, playerStartX, playerStartY);
         this.game.shaker = new CrashLanding.Sprite.Shaker(this.game, playerStartX, playerStartY);
+
+        this.game.fish = this.game.add.group();
+        for (var i=0; i < 20; i++) {
+            this.game.fish.add(new CrashLanding.Sprite.Fishguy(this.game));
+        }
+
 
         this.game.camera.follow(this.game.player);
 
@@ -114,6 +120,7 @@ CrashLanding.Game.prototype = {
 		//	Stop music, delete sprites, purge caches, free resources, all that good stuff.
         this.game.player = null;
         this.game.water = null;
+        this.game.fish = null;
         this.game.camera.x = 0;
         this.game.camera.y = 0;
 
@@ -121,6 +128,7 @@ CrashLanding.Game.prototype = {
 	},
     render: function () {
         // this.game.debug.body(this.game.player);
+        // this.game.debug.body(this.game.fish);
         // this.game.water.forEach(function() {
         //     this.game.debug.body(this.game.water.children[0]);
         // }, this)

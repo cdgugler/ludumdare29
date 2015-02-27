@@ -29,6 +29,18 @@ CrashLanding.Util.explodeGround = function explodeGround(game, exploder) {
                 sprite.body.velocity.y = game.rnd.integerInRange(yVelocityMin, yVelocityMax);
             });
             game.waterExplode.play('', 0, .3);
+
+
+            for (var i = 0; i < game.rnd.integerInRange(1, 4); i++) {
+                var fish = game.fish.getFirstDead();
+                if (fish) {
+                    fish.reset(oldTile.worldX, oldTile.worldY - 50);
+                    fish.body.velocity.x = game.rnd.integerInRange(xVelocityMin - 50, xVelocityMax + 50);
+                    fish.body.velocity.y = game.rnd.integerInRange(yVelocityMin + 50, yVelocityMax - 50);
+                    fish.body.angularVelocity = game.rnd.integerInRange(-150, 150);
+                }
+            }
+
             if (!game.shaker.shaking) {
                 game.shaker.shake(4, 1);
             }
