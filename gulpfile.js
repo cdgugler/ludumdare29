@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var connect = require('gulp-connect');
 var spritesmith = require('gulp.spritesmith');
 var imagemin = require('gulp-imagemin');
 var texturepacker = require('spritesmith-texturepacker');
@@ -27,7 +28,20 @@ gulp.task('tiles', function() {
     spriteData.css.pipe(gulp.dest('build/images'));
 });
 
-
-gulp.task('default', function() {
-    // nothing right now
+gulp.task('connect', function() {
+    connect.server({
+        root: './',
+        livereload: true,
+        open: true
+    });
 });
+
+gulp.task('js', function() {
+    gulp.src('./src/js/*.js').pipe(connect.reload());
+});
+
+gulp.task('watch', function() {
+    gulp.watch(['./src/js/*.js'], ['js']);
+});
+
+gulp.task('default', ['connect', 'watch']);
